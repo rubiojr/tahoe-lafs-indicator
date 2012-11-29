@@ -1,3 +1,9 @@
+tahoe-lafs-indicator (0.1.1-0ubuntu1) quantal; urgency=low
+
+  * 0.1.1 update 
+
+ -- Sergio Rubio <rubiojr@frameos.org>  Thu, 29 Nov 2012 20:58:08 +0100
+
 tahoe-lafs-indicator (0.1-1) quantal; urgency=low
 
   * Initial release 
