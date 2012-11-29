@@ -1,0 +1,17 @@
+Source: tahoe-lafs-indicator
+Section: ruby
+Priority: optional
+Maintainer: Debian Ruby Extras Maintainers <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Sergio Rubio <rubiojr@frameos.org>
+DM-Upload-Allowed: yes
+Build-Depends: debhelper (>= 7.0.50~), gem2deb (>= 0.2)
+Standards-Version: 3.9.3
+Homepage: http://github.com/rubiojr/tahoe-lafs-indicator
+XS-Ruby-Versions: all
+
+Package: tahoe-lafs-indicator
+Architecture: all
+XB-Ruby-Versions: ${ruby:Versions}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter, ruby-excon, ruby-gtk2, ruby-json, ruby-libappindicator
+Description: Tahoe-LAFS Indicator/StatusIcon
+ Displays Tahoe-LAFS gateway activity.
