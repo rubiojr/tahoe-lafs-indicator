@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+#
+# Got some help from
+# https://wfarr.wordpress.com/category/linux/ruby/
+# http://ruby-gnome2.sourceforge.jp/hiki.cgi?StatusIcon+example
+
+require 'thread'
+require 'gtk2'
+require 'tahoetray/threading_hack'
+require 'tahoetray/statusicon'
+require 'tahoetray/settings'
+require 'tahoetray/log'
+require 'tahoetray/version'
+include TahoeTray
+
+settings = TahoeTray::Settings.load
+unless settings[:gateway_url]
+  settings[:gateway_url] = 'http://localhost:3456' 
+  settings.save
+end
+
+icon = StatusIcon.new
+icon.start
+Gtk::Settings.default.set_property "gtk-menu-images", true
+# threading_hack
+Gtk.main_with_queue 50

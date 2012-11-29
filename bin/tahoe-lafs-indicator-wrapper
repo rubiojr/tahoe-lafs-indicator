@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# http://askubuntu.com/questions/70296/is-there-an-environment-variable-that-is-set-for-unity
+if [ "$XDG_CURRENT_DESKTOP" = 'Unity' ]; then
+  tahoe-lafs-indicator
+else
+  tahoe-lafs-tray
+fi
+

@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# encoding: utf-8
+#
+require 'thread'
+require 'gtk2'
+require 'tahoetray/threading_hack'
+require 'tahoetray/indicator'
+require 'tahoetray/log'
+require 'tahoetray/version'
+require 'tahoetray/settings'
+include TahoeTray
+
+settings = TahoeTray::Settings.load
+unless settings[:gateway_url]
+  settings[:gateway_url] = 'http://localhost:3456' 
+  settings.save
+end
+icon = Indicator.new
+icon.start
+
+# Don't think this is required with Indicators
+Gtk::Settings.default.set_property "gtk-menu-images", true
+Gtk.main_with_queue 50

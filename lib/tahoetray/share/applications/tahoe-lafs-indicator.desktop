@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=0.1
+Name=Tahoe-LAFS Indicator
+Comment=Displays Tahoe-LAFS gateway activity
+Icon=tahoe-lafs
+Terminal=false
+Exec=/usr/bin/tahoe-lafs-indicator-wrapper
+Categories=Network;FileTransfer;
