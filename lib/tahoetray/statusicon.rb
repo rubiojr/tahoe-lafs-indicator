@@ -19,7 +19,7 @@ module TahoeTray
       @icon = Gtk::StatusIcon.new
       @off_icon = Gdk::Pixbuf.new(TahoeTray::Resources.get_icon('tahoe-lafs.svg'))
       @icon.pixbuf = @off_icon
-      @icon.tooltip ='Tahoe Lafs'
+      @icon.tooltip ='Tahoe-LAFS'
       #@settings = Settings.load
 
       # 
@@ -39,11 +39,17 @@ module TahoeTray
     def start
       @thread = Thread.start do
         loop do
-          response = Excon.get "http://localhost:3456/status/?t=json"
-          if (JSON.parse response.body)['active'].size > 0
-            animate
-          else
-            stop_animation
+          begin
+            response = Excon.get "http://localhost:3456/status/?t=json"
+            if (JSON.parse response.body)['active'].size > 0
+              animate
+            else
+              stop_animation
+            end
+          rescue Exception => e
+            Log.error "Error fetching status from gateway"
+            Log.error e.message
+            Log.debug e.backtrace
           end
           sleep 1 
         end
