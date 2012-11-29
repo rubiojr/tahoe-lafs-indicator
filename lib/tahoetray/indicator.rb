@@ -14,7 +14,7 @@ module TahoeTray
 
     def initialize
       @off_indicator = 'tahoe-lafs'
-      @indicator = AppIndicator::AppIndicator.new "Tahoe Lafs", 
+      @indicator = AppIndicator::AppIndicator.new "Tahoe-LAFS", 
                                                   @off_indicator, 
                                                   AppIndicator::Category::APPLICATION_STATUS
       @indicator.set_icon_theme_path TahoeTray::Resources.base_dir + "/icons"
@@ -30,11 +30,17 @@ module TahoeTray
     def start
       @thread = Thread.start do
         loop do
-          response = Excon.get @gw_url
-          if (JSON.parse response.body)['active'].size > 0
-            animate
-          else
-            stop_animation
+          begin
+            response = Excon.get @gw_url
+            if (JSON.parse response.body)['active'].size > 0
+              animate
+            else
+              stop_animation
+            end
+          rescue Exception => e
+            Log.error "Error fetching status from gateway"
+            Log.error e.message
+            Log.debug e.backtrace
           end
           sleep 1 
         end
