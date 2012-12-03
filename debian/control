@@ -12,6 +12,6 @@ XS-Ruby-Versions: all
 Package: tahoe-lafs-indicator
 Architecture: all
 XB-Ruby-Versions: ${ruby:Versions}
-Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter, ruby-excon, ruby-gnome2, ruby-json, ruby-libappindicator
+Depends: ${shlibs:Depends}, ${misc:Depends}, ruby | ruby-interpreter, ruby-excon, ruby-gnome2, ruby-json, ruby-libappindicator, tahoe-lafs
 Description: Tahoe-LAFS Indicator/StatusIcon
  Displays Tahoe-LAFS gateway activity.
