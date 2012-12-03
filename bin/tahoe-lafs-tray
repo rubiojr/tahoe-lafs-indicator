@@ -8,7 +8,7 @@
 require 'thread'
 require 'gtk2'
 require 'tahoetray/threading_hack'
-require 'tahoetray/statusicon'
+require 'tahoetray/notification_area_icon'
 require 'tahoetray/settings'
 require 'tahoetray/log'
 require 'tahoetray/version'
