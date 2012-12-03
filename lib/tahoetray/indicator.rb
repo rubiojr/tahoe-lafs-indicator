@@ -76,6 +76,7 @@ module TahoeTray
     def create_menues 
       @info = Gtk::ImageMenuItem.new(Gtk::Stock::INFO)
       @info.signal_connect('activate'){ }
+      @preferences = Gtk::ImageMenuItem.new(Gtk::Stock::PREFERENCES)
       @about = Gtk::ImageMenuItem.new(Gtk::Stock::ABOUT)
       @about.signal_connect('activate') do
         d = Gtk::AboutDialog.new
@@ -95,6 +96,8 @@ module TahoeTray
       @quit.signal_connect('activate'){ Gtk.main_quit }
       @menu = Gtk::Menu.new
       @menu.append(@info)
+      @menu.append(Gtk::SeparatorMenuItem.new)
+      @menu.append(@preferences)
       @menu.append(@about)
       @menu.append(@quit)
       @menu.show_all

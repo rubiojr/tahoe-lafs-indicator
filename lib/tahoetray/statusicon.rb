@@ -6,6 +6,7 @@ require 'tahoetray/notify'
 require 'thread'
 require 'excon'
 require 'json'
+require 'tahoetray/preferences_dialog'
 
 module TahoeTray
 
@@ -32,6 +33,7 @@ module TahoeTray
       end
       @active = false
       @animate_thread = nil
+      @builder = Gtk::Builder.new
 
       create_menues
     end
@@ -84,6 +86,14 @@ module TahoeTray
     def create_menues
       @info = Gtk::ImageMenuItem.new(Gtk::Stock::INFO)
       @info.signal_connect('activate'){ }
+      @preferences = Gtk::ImageMenuItem.new(Gtk::Stock::PREFERENCES)
+      @preferences.signal_connect('activate') do
+        unless defined?(@preferences_dialog) and @preferences_dialog
+          @preferences_dialog = PreferencesDialog.new
+          @preferences_dialog.run
+          @preferences_dialog = nil
+        end
+      end
       @about = Gtk::ImageMenuItem.new(Gtk::Stock::ABOUT)
       @about.signal_connect('activate') do
         d = Gtk::AboutDialog.new
@@ -103,6 +113,8 @@ module TahoeTray
       @quit.signal_connect('activate'){ Gtk.main_quit }
       @menu = Gtk::Menu.new
       @menu.append(@info)
+      @menu.append(Gtk::SeparatorMenuItem.new)
+      @menu.append(@preferences)
       @menu.append(@about)
       @menu.append(@quit)
       @menu.show_all
